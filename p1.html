@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聖若瑟教區中學第五校 · 小一數學思維課 (30週) 融入 TIMSS 素養互動實驗室</title>
+  <meta name="description" content="聖若瑟教區中學第五校小一數學思維課30週校本教材互動實驗室，融入 TIMSS 國際素養標準，具備可操作滑桿、動態平移、旋轉與要素添加等趣味動態功能，原生支援 Word OMML 數學方程式。">
+  <link rel="stylesheet" href="style_p1.css?v=20261020_v1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- MathJax 3 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="app-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="btn-icon" title="切換選單"><i class="fa-solid fa-bars"></i></button>
+      <div class="brand">
+        <span class="badge-school">聖若瑟五校 · 校本教材</span>
+        <h1 class="brand-title">小一數學思維課 30 週互動實驗室</h1>
+        <span class="badge-pisa"><i class="fa-solid fa-shapes"></i> TIMSS 素養啟蒙</span>
+      </div>
+      <div class="grade-switcher">
+        <a href="p1.html" class="grade-btn active">🎒 小一 (30週)</a>
+        <a href="index.html" class="grade-btn inactive">📘 小六 (30週)</a>
+        <a href="g7.html" class="grade-btn inactive">📙 初一 (30週)</a>
+      </div>
+    </div>
+    
+    <div class="header-center">
+      <div class="week-stepper">
+        <button id="btnPrevWeek" class="btn-step" title="上一週 (←)"><i class="fa-solid fa-chevron-left"></i> 上一週</button>
+        <select id="weekSelect" class="week-select"></select>
+        <button id="btnNextWeek" class="btn-step" title="下一週 (→)">下一週 <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="btnToggleCER" class="btn-action"><i class="fa-solid fa-magnifying-glass"></i> <span class="hide-sm">小偵探說理</span></button>
+      <button id="btnFullscreen" class="btn-icon" title="全螢幕投影"><i class="fa-solid fa-expand"></i></button>
+    </div>
+  </header>
+
+  <!-- App Main Container -->
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">全部 (30)</button>
+          <button class="filter-tab" data-filter="t1">上學期 (15)</button>
+          <button class="filter-tab" data-filter="t2">下學期 (15)</button>
+        </div>
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass" style="color:#94a3b8;"></i>
+          <input type="text" id="lessonSearch" placeholder="搜尋小一週次、主題...">
+        </div>
+      </div>
+      <div id="lessonList" class="lesson-list">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- Lesson Info Banner -->
+      <section class="lesson-banner">
+        <div class="banner-top">
+          <span id="bannerWeek" class="tag-week">第 01 週</span>
+          <span id="bannerDomain" class="tag-domain">度量與幾何 · 空間推理</span>
+          <span id="bannerUnit" class="tag-unit">1上A 課次2 位置</span>
+        </div>
+        <h2 id="bannerTitle" class="lesson-headline">空間方位與視角推理：前後、左右與面對面的鏡像秘密</h2>
+      </section>
+
+      <!-- Mission Prompt Bar -->
+      <div class="mission-box">
+        <div class="mission-text">
+          <i class="fa-solid fa-gamepad" style="color:#2563eb; font-size:1.2rem;"></i>
+          <span id="missionText">動動小手指：拖一拖小人轉個身，看看對面的左手和右手藏著什麼秘密！</span>
+        </div>
+        <span id="feedbackBadge" style="display:none; background:#10b981; color:#fff; font-size:0.8rem; font-weight:800; padding:4px 10px; border-radius:8px;">✨ 太棒了！</span>
+      </div>
+
+      <!-- Interactive Lab Sandbox Card -->
+      <section class="lab-card">
+        <!-- Dynamic Canvas / SVG Manipulatives Stage -->
+        <div id="labStage" class="lab-stage">
+          <!-- Dynamic Manipulatives Rendered via app_p1.js -->
+        </div>
+
+        <!-- Controls Toolbar (Sliders, Buttons, Toggles) -->
+        <div id="controlPanel" class="control-panel">
+          <!-- Rendered dynamically for current week's experiment -->
+        </div>
+
+        <!-- Mathematical Readout & Native OMML Copy -->
+        <div class="formula-bar">
+          <div class="formula-content">
+            <span class="formula-tag">📐 核心算理</span>
+            <span id="formulaMath" class="formula-math">面對面 ⇒ 對方的右手 ＝ 我的左手</span>
+          </div>
+          <button id="btnCopyOMML" class="btn-copy-omml"><i class="fa-regular fa-copy"></i> 複製 Word 原生 OMML 公式</button>
+        </div>
+      </section>
+
+      <!-- Kid CER Courtroom (Collapsible) -->
+      <section id="cerSection" class="cer-container">
+        <h3 style="font-size:1rem; font-weight:800; color:#1e293b; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-gavel" style="color:#8b5cf6;"></i> 數學小偵探說一說（童趣說理四步走）
+        </h3>
+        <div class="cer-grid">
+          <div class="cer-card claim">
+            <div class="cer-header">🟢 【我的主張】亮觀點</div>
+            <div id="cerClaim" class="cer-body">樂樂站在美美的右邊（以美美自己為基準看）。</div>
+          </div>
+          <div class="cer-card evidence">
+            <div class="cer-header">🟡 【事實證據】找證據</div>
+            <div id="cerEvidence" class="cer-body">美美右手戴紅環，樂樂牽著美美戴紅環的手。</div>
+          </div>
+          <div class="cer-card reasoning">
+            <div class="cer-header">🔵 【數學道理】說秘密</div>
+            <div id="cerReasoning" class="cer-body">判斷別人的左右要站在對方的角度看；面對面時左右剛好相反！</div>
+          </div>
+          <div class="cer-card rebuttal">
+            <div class="cer-header">🔴 【擊破迷思】避糊塗</div>
+            <div id="cerRebuttal" class="cer-body">不能用對面拍照老師自己的左右看，因為兩人身體朝向相反！</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Success Message -->
+  <div id="toastSuccess" class="toast-success">
+    <i class="fa-solid fa-star" style="color:#fde047;"></i>
+    <span id="toastMsg">太棒了！已複製 Word 原生 OMML 公式到剪貼簿！</span>
+  </div>
+
+  <!-- App JavaScript -->
+  <script src="app_p1.js?v=20261020_v1"></script>
+</body>
+</html>
